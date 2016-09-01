@@ -15,32 +15,34 @@ dynamicApp.controller('itemCtrl', function($scope, $localStorage) {
 $scope.$storage = $localStorage.$default({
     items: items
   });
+$scope.addName="";
+$scope.newComment="";
 $scope.visibleItems=false;
 $scope.visibleComs=false;
 $scope.addItem = function () {
   if ($scope.addName!=="") {
-  items.push({
-  name: $scope.addName,
-  comments: []});
-  $scope.addName="";
+      items.push({
+      name: $scope.addName,
+      comments: []});
+      $scope.addName="";
     }
   };
-  $scope.deleteItem = function (idx) {
+$scope.deleteItem = function (idx) {
     items.splice(idx, 1);
     $scope.visibleComs=false;
 };
 $scope.viewComments = function (idx) {
-  if ($scope.visibleComs===true && $scope.itemidx==items[idx]){
-    $scope.visibleComs=false;
-    }  else { $scope.itemidx=items[idx];
+  if ($scope.visibleComs===true && $scope.itemidx==items[idx]) {
+        $scope.visibleComs=false;
+        }  else { $scope.itemidx=items[idx];
             $scope.visibleComs=true;
             }
 };
 $scope.addComment = function(keyEvent){
   if (keyEvent.which===13 && $scope.newComment!==""){
-    items[items.indexOf($scope.itemidx)].comments.push($scope.newComment);
-    $scope.newComment="";
-  }
+        items[items.indexOf($scope.itemidx)].comments.push($scope.newComment);
+        $scope.newComment="";
+    }
 };
 $localStorage.items=items;
 console.log($localStorage.items);
